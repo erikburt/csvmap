@@ -1,0 +1,13 @@
+# Binary
+csvmap
+
+# Test files
+testdata/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+
+# Claude Code
+.claude/
