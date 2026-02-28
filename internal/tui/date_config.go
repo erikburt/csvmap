@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strings"
 
-	"csvmap/internal/dateformat"
+	"github.com/erikburt/csvmap/internal/dateformat"
 
 	"github.com/charmbracelet/bubbles/textinput"
 	tea "github.com/charmbracelet/bubbletea"

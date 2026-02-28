@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"strings"
 
-	"csvmap/internal/config"
-	"csvmap/internal/csv"
+	"github.com/erikburt/csvmap/internal/config"
+	"github.com/erikburt/csvmap/internal/csv"
 
 	tea "github.com/charmbracelet/bubbletea"
 )

@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"os"
 
-	"csvmap/internal/config"
-	"csvmap/internal/tui"
+	"github.com/erikburt/csvmap/internal/config"
+	"github.com/erikburt/csvmap/internal/tui"
 
 	tea "github.com/charmbracelet/bubbletea"
 )

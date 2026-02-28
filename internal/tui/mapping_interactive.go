@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"strings"
 
-	"csvmap/internal/csv"
-	"csvmap/internal/mapping"
+	"github.com/erikburt/csvmap/internal/csv"
+	"github.com/erikburt/csvmap/internal/mapping"
 
 	"github.com/charmbracelet/bubbles/textinput"
 	tea "github.com/charmbracelet/bubbletea"

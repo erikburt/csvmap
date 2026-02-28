@@ -1,4 +1,4 @@
-module csvmap
+module github.com/erikburt/csvmap
 
 go 1.25.4
 

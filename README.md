@@ -7,13 +7,13 @@ Built for cleaning up CSV exports (like credit card statements) with persistent 
 ## Install
 
 ```bash
-go install github.com/yourusername/csvmap@latest
+go install github.com/erikburt/csvmap@latest
 ```
 
 Or build from source:
 
 ```bash
-git clone https://github.com/yourusername/csvmap
+git clone https://github.com/erikburt/csvmap
 cd csvmap
 go build -o csvmap .
 ```

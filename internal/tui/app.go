@@ -2,10 +2,10 @@
 package tui
 
 import (
-	"csvmap/internal/config"
-	"csvmap/internal/csv"
-	"csvmap/internal/dateformat"
-	"csvmap/internal/mapping"
+	"github.com/erikburt/csvmap/internal/config"
+	"github.com/erikburt/csvmap/internal/csv"
+	"github.com/erikburt/csvmap/internal/dateformat"
+	"github.com/erikburt/csvmap/internal/mapping"
 
 	tea "github.com/charmbracelet/bubbletea"
 	"github.com/charmbracelet/lipgloss"
