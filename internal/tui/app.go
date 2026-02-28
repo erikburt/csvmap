@@ -36,6 +36,7 @@ const (
 	OpStringMapping
 	OpDropColumn
 	OpFilterRows
+	OpInvertSign
 )
 
 // ColumnOperation represents an operation to be applied to a column.
@@ -295,6 +296,11 @@ func (m *Model) updateCurrentView(msg tea.Msg) (tea.Model, tea.Cmd) {
 				m.CurrentView = ViewRowFilter
 				m.CurrentOp.RowsToDrop = make(map[int]bool)
 				m.RowFilterModel = NewRowFilterModel(m.Data, m.CurrentOp.ColumnIndex)
+			} else if result.Operation == OpInvertSign {
+				// Invert sign requires no configuration, add directly
+				m.Operations = append(m.Operations, *m.CurrentOp)
+				m.CurrentView = ViewColumnSelect
+				m.ColumnSelectModel = NewColumnSelectModel(m.Data, m.Operations, m.ColumnOrder)
 			} else {
 				// Cancelled, go back to column select
 				m.CurrentView = ViewColumnSelect
@@ -434,6 +440,9 @@ func (m *Model) applyAndWrite() error {
 				}
 				return value
 			})
+
+		case OpInvertSign:
+			outputData.TransformColumn(op.ColumnIndex, invertSign)
 		}
 	}
 
@@ -509,6 +518,41 @@ func isIdentityOrder(order []int) bool {
 		}
 	}
 	return true
+}
+
+// invertSign flips the sign of a numeric value.
+// Handles formats like: -12.34, 12.34, $-12.34, -$12.34, $12.34, etc.
+func invertSign(value string) string {
+	if value == "" {
+		return value
+	}
+
+	// Check if there's a minus sign anywhere in the value
+	minusIdx := -1
+	for i, c := range value {
+		if c == '-' {
+			minusIdx = i
+			break
+		}
+	}
+
+	if minusIdx >= 0 {
+		// Remove the minus sign
+		return value[:minusIdx] + value[minusIdx+1:]
+	}
+
+	// No minus sign - need to add one
+	// Find the position to insert: after any leading currency symbols/spaces, before digits
+	insertPos := 0
+	for i, c := range value {
+		if c >= '0' && c <= '9' {
+			insertPos = i
+			break
+		}
+		insertPos = i + 1
+	}
+
+	return value[:insertPos] + "-" + value[insertPos:]
 }
 
 // View renders the current view.

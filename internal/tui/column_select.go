@@ -231,6 +231,8 @@ func (m *ColumnSelectModel) View() string {
 				opType = "Drop Column"
 			case OpFilterRows:
 				opType = fmt.Sprintf("Filter Rows (%d to drop)", op.RowsToDropCount)
+			case OpInvertSign:
+				opType = "Invert Sign"
 			}
 			_ = i
 			s.WriteString(fmt.Sprintf("%s%s: %s\n", cursor, style.Render(op.ColumnName), highlightStyle.Render(opType)))

@@ -143,6 +143,10 @@ func (m *ReviewModel) View() string {
 			case OpFilterRows:
 				s.WriteString("    Operation: Filter Rows\n")
 				s.WriteString(fmt.Sprintf("    Rows to drop: %s\n", errorStyle.Render(fmt.Sprintf("%d", op.RowsToDropCount))))
+
+			case OpInvertSign:
+				s.WriteString("    Operation: Invert Sign\n")
+				s.WriteString("    Flip positive/negative on all values\n")
 			}
 			s.WriteString("\n")
 		}

@@ -43,7 +43,7 @@ func (m *OperationSelectModel) Update(msg tea.Msg) OperationSelectResult {
 				m.cursor--
 			}
 		case "down", "j":
-			if m.cursor < 4 { // 5 options: date, mapping, drop, filter, cancel
+			if m.cursor < 5 { // 6 options: date, mapping, drop, filter, invert sign, cancel
 				m.cursor++
 			}
 		case "enter":
@@ -58,6 +58,8 @@ func (m *OperationSelectModel) Update(msg tea.Msg) OperationSelectResult {
 			case 3:
 				m.operation = OpFilterRows
 			case 4:
+				m.operation = OpInvertSign
+			case 5:
 				m.operation = OpNone // Cancel
 			}
 			return OperationSelectResult{Done: true, Operation: m.operation}
@@ -87,6 +89,7 @@ func (m *OperationSelectModel) View() string {
 		{"String Mapping", "Map values using pattern matching (e.g., merchant names)"},
 		{"Drop Column", "Remove this column from the output"},
 		{"Filter Rows", "Interactively review and drop rows"},
+		{"Invert Sign", "Flip positive/negative on numeric values (e.g., -12.34 → 12.34)"},
 		{"Cancel", "Go back to column selection"},
 	}
 
